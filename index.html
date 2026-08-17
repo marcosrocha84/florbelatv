@@ -28,6 +28,7 @@
     --text-muted:#bba9c6;
     --line:rgba(232,163,192,0.22);
     --radius:3px;
+    --banner-h:52px;
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -70,11 +71,29 @@
     .reveal{opacity:1; transform:none; transition:none;}
   }
 
+  /* ---------- BANNER PROMOCIONAL (BlizzCon) ---------- */
+  .promo-banner{
+    position:fixed; top:0; left:0; right:0; z-index:60; min-height:var(--banner-h);
+    background:linear-gradient(120deg, var(--sakura), var(--lilac)); color:#1a1024;
+    display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;
+    padding:10px 44px; font-size:0.85rem; font-weight:600; text-align:center;
+  }
+  .promo-banner a{text-decoration:underline; text-underline-offset:2px;}
+  .promo-close{
+    position:absolute; right:12px; top:50%; transform:translateY(-50%);
+    background:none; border:none; color:#1a1024; font-size:1.2rem; line-height:1;
+    cursor:pointer; padding:6px; opacity:0.75;
+  }
+  .promo-close:hover{opacity:1;}
+  html.no-banner .promo-banner{display:none;}
+  html.no-banner header{top:0;}
+  html.no-banner .hero{padding-top:110px;}
+
   /* ---------- NAV ---------- */
   header{
-    position:fixed; top:0; left:0; right:0; z-index:50;
+    position:fixed; top:var(--banner-h); left:0; right:0; z-index:50;
     background:linear-gradient(to bottom, rgba(26,16,36,0.95), rgba(26,16,36,0));
-    padding:20px 0 40px;
+    padding:20px 0 40px; transition:top .25s ease;
   }
   nav.wrap{display:flex; justify-content:space-between; align-items:center;}
   .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.5rem; letter-spacing:0.02em; color:var(--sakura-soft);}
@@ -109,7 +128,8 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    min-height:60vh; display:flex; flex-direction:column; justify-content:center; padding-top:110px; position:relative;
+    min-height:60vh; display:flex; flex-direction:column; justify-content:center; position:relative;
+    padding-top:calc(110px + var(--banner-h)); transition:padding-top .25s ease;
     background-image:linear-gradient(180deg, rgba(26,16,36,0.86), rgba(26,16,36,0.93)), url('assets/fundo.png');
     background-size:cover; background-position:center; background-repeat:no-repeat;
   }
@@ -198,10 +218,24 @@
   .tl-item::before{
     content:""; position:absolute; left:-6px; top:4px; width:11px; height:11px;
     border-radius:50%; background:var(--bg-deep); border:2px solid var(--sakura);
+    transition:background .2s, border-color .2s;
   }
   .tl-year{font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--gold); font-weight:700;}
   .tl-item h3{font-size:1.15rem; margin:6px 0 8px; color:var(--text-main);}
   .tl-item p{color:var(--text-muted); max-width:520px; font-size:0.95rem;}
+
+  /* meta batida (marcação manual: adicionar class="tl-item done" no item) */
+  .tl-item.done::before{background:var(--gold); border-color:var(--gold);}
+  .tl-item.done .tl-icon{
+    background:linear-gradient(120deg, var(--gold), var(--sakura)); border-color:var(--gold);
+  }
+  .tl-item.done .tl-icon svg{stroke:#1a1024;}
+  .tl-done-badge{display:none;}
+  .tl-item.done .tl-done-badge{
+    display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:999px;
+    background:rgba(212,175,106,0.18); border:1px solid var(--gold);
+    color:var(--gold); font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase;
+  }
 
   /* ---------- SETUP ---------- */
   .setup-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
@@ -260,6 +294,30 @@
   .social-item .platform{font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--sakura-soft);}
   .social-item .handle{font-size:0.8rem; color:var(--text-muted);}
 
+  /* ---------- BLIZZCON 2026 ---------- */
+  #blizzcon{
+    background-image:linear-gradient(180deg, rgba(26,16,36,0.93), rgba(26,16,36,0.96)), url('assets/blz-logo.webp');
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+  }
+  .blizzcon-quote{
+    border-left:2px solid var(--gold); padding-left:24px; margin-bottom:32px;
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.3rem;
+    color:var(--sakura-soft); max-width:640px;
+  }
+  .blizzcon-event-link{margin-bottom:32px;}
+  .blizzcon-event-link a{color:var(--gold); text-decoration:underline; text-underline-offset:3px; font-size:0.9rem;}
+  .blizzcon-event-link a:hover{color:var(--sakura-soft);}
+  .blizzcon-mechanic{color:var(--text-muted); margin:32px 0 40px;}
+  .blizzcon-mechanic b{color:var(--gold); font-weight:700;}
+  #blizzcon .timeline{margin-bottom:40px;}
+  .tl-head{display:flex; align-items:center; gap:12px;}
+  .tl-icon{
+    width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(120deg, rgba(232,163,192,0.18), rgba(169,136,214,0.18));
+    border:1px solid var(--line); flex-shrink:0;
+  }
+  .tl-icon svg{width:24px; height:24px;}
+
   /* ---------- APOIE ---------- */
   #apoie{
     background-image:linear-gradient(180deg, rgba(26,16,36,0.86), rgba(26,16,36,0.93)), url('assets/fundo4.jpg');
@@ -272,6 +330,7 @@
     display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap;
   }
   .support-box p{color:var(--text-muted); max-width:480px; font-size:0.95rem;}
+  .support-box p + p{margin-top:4px;}
   .livepix-qr{width:140px; height:auto; border-radius:var(--radius); border:1px solid var(--line); flex-shrink:0;}
 
   /* ---------- AGENDA ---------- */
@@ -313,12 +372,26 @@
     .agenda-grid{grid-template-columns:1fr;}
     .extension-grid{grid-template-columns:1fr;}
     .hero-avatar{width:46px; height:46px;}
+    :root{--banner-h:76px;}
+    .promo-banner{padding:10px 40px; font-size:0.78rem;}
   }
 
   :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
 </style>
 </head>
 <body>
+
+<script>
+  // roda antes da pintura pra evitar "flash" do banner já dispensado antes
+  if (localStorage.getItem('blizzconBannerDismissed')) {
+    document.documentElement.classList.add('no-banner');
+  }
+</script>
+
+<div class="promo-banner" id="promoBanner">
+  <span>🌸 Ajude a Florbela a realizar o sonho de ir na <strong>BlizzCon 2026</strong> — cada R$10 doados concorre a prêmios! <a href="#blizzcon">Saiba mais →</a></span>
+  <button type="button" class="promo-close" id="promoClose" aria-label="Fechar aviso">&times;</button>
+</div>
 
 <div class="petals" aria-hidden="true"></div>
 
@@ -495,6 +568,140 @@
     </div>
   </section>
 
+  <!-- BLIZZCON 2026 -->
+  <section id="blizzcon">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="divider"></div>
+        <span class="eyebrow">Sonho de Azeroth</span>
+        <h2>Projeto Florbela na BlizzCon 2026</h2>
+      </div>
+
+      <blockquote class="blizzcon-quote reveal">
+        "Acho chique quem decide ir na BlizzCon e tem grana pra ir sem ajuda. Essa pessoa não sou eu — mas quero muito realizar esse sonho."
+      </blockquote>
+
+      <p class="blizzcon-event-link reveal">
+        <a href="https://blizzcon.com/pt-br/event" target="_blank" rel="noopener noreferrer">Saiba mais sobre o evento oficial da Blizzard →</a>
+      </p>
+
+      <p class="blizzcon-mechanic reveal">Cada <b>R$10 doados no Live Pix</b> vale um número da sorte. Conforme as metas abaixo forem batidas, mais sorteios são desbloqueados.</p>
+
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h13v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V5z"/><path d="M16 8h2a3 3 0 0 1 0 6h-2"/></svg></span>
+            <div class="tl-year">R$ 350</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Caneca "Florbela Visita"</h3>
+          <p>Sorteio de uma caneca exclusiva entre quem já doou.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span>
+            <div class="tl-year">R$ 700</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Desenho da Josie</h3>
+          <p>Um desenho de um personagem famoso do WoW, feito pela Josie.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3c2.6 0 4.7-2.1 4.7-4.7C22 6.1 17.5 2 12 2z"/><circle cx="6.5" cy="11.5" r="1.3" fill="#f4c2da" stroke="none"/><circle cx="9.5" cy="7.5" r="1.3" fill="#f4c2da" stroke="none"/><circle cx="14.5" cy="7.5" r="1.3" fill="#f4c2da" stroke="none"/><circle cx="17.5" cy="11.5" r="1.3" fill="#f4c2da" stroke="none"/></svg></span>
+            <div class="tl-year">R$ 1.050</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Retrato em aquarela</h3>
+          <p>Um retrato do seu personagem, pintado à mão pela própria Florbela.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h13v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V5z"/><path d="M16 8h2a3 3 0 0 1 0 6h-2"/></svg></span>
+            <div class="tl-year">R$ 1.400</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Segunda caneca "Florbela Visita"</h3>
+          <p>Mais uma caneca exclusiva sorteada entre os apoiadores.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span>
+            <div class="tl-year">R$ 1.750</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Segundo desenho da Josie</h3>
+          <p>Outro desenho de personagem famoso do WoW, feito pela Josie.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L21 9L17 22H7L3 9Z"/><path d="M3 9H21"/><path d="M12 2L7 22"/><path d="M12 2L17 22"/></svg></span>
+            <div class="tl-year">R$ 2.100</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Mesa de RPG D&D x Warcraft</h3>
+          <p>Mesa especial em live, mestrada pela Josie, pros apoiadores.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+            <div class="tl-year">R$ 2.500</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Revista WoW Decor</h3>
+          <p>Uma revista exclusiva sorteada entre os apoiadores.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18"/><path d="M12 8v13"/><path d="M12 8c-1.5-4-6-4-6-1 0 1.5 2 1 6 1zm0 0c1.5-4 6-4 6-1 0 1.5-2 1-6 1z"/></svg></span>
+            <div class="tl-year">R$ 3.000</div>
+            <span class="tl-done-badge">✓ Meta batida</span>
+          </div>
+          <h3>Funko Pop Illidan #14</h3>
+          <p>Meta final: edição de coleção sorteada entre quem apoiou o projeto.</p>
+        </div>
+      </div>
+
+      <div class="support-box reveal">
+        <div>
+          <h2>Live Pix</h2>
+          <p>Doe qualquer valor pelo Live Pix pra apoiar a ida da Florbela à BlizzCon e concorrer aos sorteios.</p>
+        </div>
+        <img src="assets/livepix.png" alt="QR Code para doação via Live Pix" class="livepix-qr">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCURSO CULTURAL -->
+  <section id="concurso">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="divider"></div>
+        <span class="eyebrow">Concurso Cultural</span>
+        <h2>Um cantinho aconchegante — by Florbela</h2>
+      </div>
+
+      <blockquote class="blizzcon-quote reveal">
+        "Envie uma foto do cantinho mais aconchegante da sua casa no jogo, acompanhada do nome do personagem e do reino. Bora participar! Ishnu-alah"
+      </blockquote>
+
+      <p class="blizzcon-mechanic reveal">Prazo final pra participar: <b>10/10/2026</b></p>
+
+      <div class="support-box reveal">
+        <div>
+          <h2>Premiação</h2>
+          <p>🥇 Camiseta Florbela TV</p>
+          <p>🥈 Caneca "Florbela Visita"</p>
+        </div>
+        <a href="https://orbita.art.br/concurso.html?c=concurso-de-housing-wow-by-florbela" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Participar / Votar</a>
+      </div>
+
+      <p class="blizzcon-event-link reveal">
+        Concurso realizado na <a href="https://orbita.art.br" target="_blank" rel="noopener noreferrer">Órbita</a>, plataforma de concursos culturais.
+      </p>
+    </div>
+  </section>
+
   <!-- APOIE -->
   <section id="apoie">
     <div class="wrap">
@@ -503,12 +710,6 @@
         <span class="eyebrow">Apoie o canal</span>
         <h2>Ajude a Florbela a crescer</h2>
       </div>
-      <div class="support-box reveal">
-        <h2>Live Pix</h2>
-        <p>Prefere fazer uma doação direta? Escaneie o QR Code do Live Pix e contribua com qualquer valor para ajudar a manter as lives no ar.</p>
-        <img src="assets/livepix.png" alt="QR Code para doação via Live Pix" class="livepix-qr">
-      </div>
-      <br>
       <div class="support-box reveal">
         <h2>Nuuvem</h2>
         <p>A Florbela também está na Nuuvem — compre saldo Battle.net, o Brutossauro ou a expansão Midnight parcelado, e apoie o canal a cada compra.</p>
@@ -522,7 +723,11 @@
         <a href="https://www.amazon.com.br/shop/alfarrabiosdeflorbela" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Ver na Amazon</a>
       </div>
       <br>
-      
+      <div class="support-box reveal">
+        <h2>Live Pix</h2>
+        <p>Prefere fazer uma doação direta? Escaneie o QR Code do Live Pix e contribua com qualquer valor para ajudar a manter as lives no ar.</p>
+        <img src="assets/livepix.png" alt="QR Code para doação via Live Pix" class="livepix-qr">
+      </div>
     </div>
   </section>
 
@@ -541,7 +746,7 @@
             <li><span>CPU</span><b>AMD Ryzen 7 5700X 8-Core</b></li>
             <li><span>Cooler</span><b>Redragon Tyr</b></li>
             <li><span>Memória</span><b>DDR4 32GB</b></li>
-            <li><span>GPU</span><b>NVIDIA GeForce RTX 4060 Compact</b></li>
+            <li><span>GPU</span><b>NVIDIA GeForce RTX 2060</b></li>
             <li><span>Placa-mãe</span><b>Biostar B550M</b></li>
             <li><span>SSD</span><b>1TB</b></li>
           </ul>
@@ -589,6 +794,15 @@
       p.style.animationDelay = (Math.random()*-20) + 's';
       petalField.appendChild(p);
     }
+  }
+
+  // banner promocional (BlizzCon) — fecha e lembra via localStorage
+  const promoClose = document.getElementById('promoClose');
+  if(promoClose){
+    promoClose.addEventListener('click', () => {
+      document.documentElement.classList.add('no-banner');
+      localStorage.setItem('blizzconBannerDismissed', '1');
+    });
   }
 
   // menu mobile
