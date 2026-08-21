@@ -299,6 +299,19 @@
     background-image:linear-gradient(180deg, rgba(26,16,36,0.93), rgba(26,16,36,0.96)), url('assets/blz-logo.webp');
     background-size:cover; background-position:center; background-repeat:no-repeat;
   }
+  .goal-hit-badge{
+    display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:6px 16px;
+    background:rgba(212,175,106,0.16); border:1px solid var(--gold); border-radius:999px;
+    color:var(--gold); font-size:0.8rem; font-weight:700; letter-spacing:0.02em;
+    animation:goal-badge-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes goal-badge-pulse{
+    0%, 100%{box-shadow:0 0 0 0 rgba(212,175,106,0.35);}
+    50%{box-shadow:0 0 0 6px rgba(212,175,106,0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .goal-hit-badge{animation:none;}
+  }
   .blizzcon-quote{
     border-left:2px solid var(--gold); padding-left:24px; margin-bottom:32px;
     font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.3rem;
@@ -309,6 +322,8 @@
   .blizzcon-event-link a:hover{color:var(--sakura-soft);}
   .blizzcon-mechanic{color:var(--text-muted); margin:32px 0 40px;}
   .blizzcon-mechanic b{color:var(--gold); font-weight:700;}
+  .blizzcon-mechanic a{color:var(--gold); text-decoration:underline; text-underline-offset:2px;}
+  .blizzcon-mechanic a:hover{color:var(--sakura-soft);}
   #blizzcon .timeline{margin-bottom:40px;}
   .tl-head{display:flex; align-items:center; gap:12px;}
   .tl-icon{
@@ -330,6 +345,8 @@
     display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap;
   }
   .support-box p{color:var(--text-muted); max-width:480px; font-size:0.95rem;}
+  .support-box p a{color:var(--gold); text-decoration:underline; text-underline-offset:2px;}
+  .support-box p a:hover{color:var(--sakura-soft);}
   .support-box p + p{margin-top:4px;}
   .livepix-qr{width:140px; height:auto; border-radius:var(--radius); border:1px solid var(--line); flex-shrink:0;}
 
@@ -401,9 +418,11 @@
     <div class="navlinks">
       <a href="#sobre">Sobre</a>
       <a href="#trajetoria">Trajetória</a>
-      <a href="#setup">Setup</a>
       <a href="#galeria">Galeria</a>
       <a href="#redes">Redes</a>
+      <a href="#blizzcon">BlizzCon</a>
+      <a href="#concurso">Concurso</a>
+      <a href="#setup">Setup</a>
     </div>
     <a href="https://www.twitch.tv/florbelatv" class="nav-live" id="navLive" target="_blank" rel="noopener noreferrer">● florbelatv</a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -411,9 +430,11 @@
   <div class="mobile-panel" id="mobilePanel">
     <a href="#sobre">Sobre</a>
     <a href="#trajetoria">Trajetória</a>
-    <a href="#setup">Setup</a>
     <a href="#galeria">Galeria</a>
     <a href="#redes">Redes</a>
+    <a href="#blizzcon">BlizzCon</a>
+    <a href="#concurso">Concurso</a>
+    <a href="#setup">Setup</a>
   </div>
 </header>
 
@@ -575,6 +596,7 @@
         <div class="divider"></div>
         <span class="eyebrow">Sonho de Azeroth</span>
         <h2>Projeto Florbela na BlizzCon 2026</h2>
+        <span class="goal-hit-badge">🎉 Primeira meta batida!</span>
       </div>
 
       <blockquote class="blizzcon-quote reveal">
@@ -585,10 +607,10 @@
         <a href="https://blizzcon.com/pt-br/event" target="_blank" rel="noopener noreferrer">Saiba mais sobre o evento oficial da Blizzard →</a>
       </p>
 
-      <p class="blizzcon-mechanic reveal">Cada <b>R$10 doados no Live Pix</b> vale um número da sorte. Conforme as metas abaixo forem batidas, mais sorteios são desbloqueados.</p>
+      <p class="blizzcon-mechanic reveal">Cada <b>R$10 doados no Live Pix</b> vale um número da sorte. Conforme as metas abaixo forem batidas, mais sorteios são desbloqueados. Acompanhe em <a href="https://www.twitch.tv/florbelatv" target="_blank" rel="noopener noreferrer">twitch.tv/florbelatv</a></p>
 
       <div class="timeline reveal">
-        <div class="tl-item">
+        <div class="tl-item done">
           <div class="tl-head">
             <span class="tl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c2da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h13v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V5z"/><path d="M16 8h2a3 3 0 0 1 0 6h-2"/></svg></span>
             <div class="tl-year">R$ 350</div>
@@ -724,9 +746,13 @@
       </div>
       <br>
       <div class="support-box reveal">
-        <h2>Live Pix</h2>
-        <p>Prefere fazer uma doação direta? Escaneie o QR Code do Live Pix e contribua com qualquer valor para ajudar a manter as lives no ar.</p>
-        <img src="assets/livepix.png" alt="QR Code para doação via Live Pix" class="livepix-qr">
+        <div>
+          <h2>Live Pix</h2>
+          <p>Prefere fazer uma doação direta? Escaneie o QR Code ao lado ou clique no link <a href="https://livepix.gg/florbela" target="_blank" rel="noopener noreferrer">livepix.gg/florbela</a> e contribua com qualquer valor para ajudar a manter as lives no ar.</p>
+        </div>
+        <a href="https://livepix.gg/florbela" target="_blank" rel="noopener noreferrer">
+          <img src="assets/livepix.png" alt="QR Code para doação via Live Pix — livepix.gg/florbela" class="livepix-qr">
+        </a>
       </div>
     </div>
   </section>
